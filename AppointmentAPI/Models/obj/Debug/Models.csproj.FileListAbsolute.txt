@@ -1,0 +1,12 @@
+D:\Akash Personal\ShopBridge\ShopBridge\Models\bin\Debug\Models.dll
+D:\Akash Personal\ShopBridge\ShopBridge\Models\bin\Debug\Models.pdb
+D:\Akash Personal\ShopBridge\ShopBridge\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+D:\Akash Personal\ShopBridge\ShopBridge\Models\obj\Debug\Models.dll
+D:\Akash Personal\ShopBridge\ShopBridge\Models\obj\Debug\Models.pdb
+D:\Akash Personal\ShopBridge\ShopBridge\Models\obj\Debug\Models.csprojAssemblyReference.cache
+D:\Akash Personal\Interview\westfarma\AppointmentAPI\Models\bin\Debug\Models.dll
+D:\Akash Personal\Interview\westfarma\AppointmentAPI\Models\bin\Debug\Models.pdb
+D:\Akash Personal\Interview\westfarma\AppointmentAPI\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+D:\Akash Personal\Interview\westfarma\AppointmentAPI\Models\obj\Debug\Models.dll
+D:\Akash Personal\Interview\westfarma\AppointmentAPI\Models\obj\Debug\Models.pdb
+D:\Akash Personal\Interview\westfarma\AppointmentAPI\Models\obj\Debug\Models.csprojAssemblyReference.cache

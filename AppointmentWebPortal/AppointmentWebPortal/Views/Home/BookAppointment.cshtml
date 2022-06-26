@@ -1,0 +1,104 @@
+﻿@model Models.PatientAppointments
+@using Models
+@{
+    ViewBag.Title = "BookAppointment";
+}
+<script>
+    function GetDateId() {
+        var id = $("input[name='AppointmentSlotId']:checked").val();
+        alert(id);
+        $('#AppointmentDateSlotId').val(id);
+    }
+
+</script>
+<h2>Book Appointment</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Employee</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientName, htmlAttributes:
+               new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientName, new
+                {
+                    htmlAttributes =
+                   new { @class = "form-control" }
+                })
+
+                @Html.ValidationMessageFor(model => model.PatientName, "",
+                   new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientEmail, htmlAttributes:
+               new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientEmail, new
+                {
+                    htmlAttributes =
+                   new { @class = "form-control" }
+                })
+
+                @Html.ValidationMessageFor(model => model.PatientEmail, "",
+                   new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientPhoneNo, htmlAttributes:
+               new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientPhoneNo, new
+                {
+                    htmlAttributes =
+                   new { @class = "form-control" }
+                })
+
+                @Html.ValidationMessageFor(model => model.PatientPhoneNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.AppointmentDateSlotId)
+
+        <div class="form-group">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Select Slot</th>
+                    <th>Date</th>
+                    <th>Slot Timing</th>
+                    <th>IsBooked</th>
+                </tr>
+                @foreach (AppointmentDateSlots item in ViewBag.AppointmentDateSlots)
+                {
+                    <tr>
+                        <td>
+                            @if (!item.IsBooked)
+                            {
+                                <input type="radio" id='@item.Id' onclick="GetDateId()" name="AppointmentSlotId" value='@item.Id'>
+                            }
+                        </td>
+                        <td>@item.AppointmentDate</td>
+                        <td>@item.FromTime-@item.ToTime</td>
+                        <td>@item.IsBooked</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+

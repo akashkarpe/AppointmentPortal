@@ -1,0 +1,127 @@
+﻿@using AppointmentWebPortal.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+
+    function AddSlots() {
+        var dt = $("#ApptDate").val();
+        var url = '@Url.Action("AddSlots", "Doctor")' + '?date=' + dt;
+        debugger
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            success: function (data) {
+                document.location.href = document.location.href;
+            }
+        });
+
+    }
+
+
+    function AcceptAppointmet(
+        ApptId) {
+        var url = '@Url.Action("AcceptAppointmet", "Doctor")' + '?AppId=' + ApptId + "&Status=2";
+        $.ajax({
+            type: "Post",
+            url: url,
+            cache: false,
+            success: function (data) {
+                document.location.href = document.location.href;
+            }
+        });
+    }
+
+        function RejectAppointmet(ApptId) {
+            var url = '@Url.Action("RejectAppointment", "Doctor")' + '?Id=' + ApptId;
+            document.location.href = url;
+
+    }
+</script>
+<h2>Doctor Dashboard</h2>
+
+
+
+<table class="table table-bordered table-striped" style="width:40%;">
+    <tr>
+        <td>Total Appoitments</td>
+        <td>@ViewBag.TotalAppointmets</td>
+    </tr>
+    <tr>
+        <td>Booked Appoitments</td>
+        <td>@ViewBag.BookedAppointmets</td>
+    </tr>
+    <tr>
+        <td>Total Upcomming Appoitments</td>
+        <td>@ViewBag.UpcommingAppointmets</td>
+    </tr>
+</table>
+
+<div class="form-group">
+    @Html.Label("Select Date", new { @class = "control-label col-md-2" })
+
+    <div class="col-md-4">
+        <input type="text" id="ApptDate" class="form-control" placeholder="dd/mm/yyyy" />
+
+    </div>
+    <button onclick="AddSlots()">Add slots</button>
+</div>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <td>IsBooked</td>
+        <th>Status</th>
+        <th>Patient Name</th>
+        <th>Patient Email</th>
+        <th>Patient PhoneNo</th>
+        <th>Action</th>
+    </tr>
+    @if (ViewBag.MySlots != null)
+    {
+        foreach (AppointmentSlotData item in ViewBag.MySlots)
+        {
+            <tr>
+                <td>@item.AppointmentDate</td>
+                <td>@item.FromTime-@item.ToTime</td>
+                <td>@item.IsBooked</td>
+                <td>
+                    @if (@item.Status == 0)
+                    {
+                        <p>Open</p>
+                    }
+                    else if (@item.Status == 1)
+                    {
+                        <p>Booked</p>
+                    }
+                    else if (@item.Status == 2)
+                    {
+                        <p>Accepted</p>
+                    }
+                    else if (@item.Status == 3)
+                    {
+                        <p>Rejected</p>
+                    }
+                </td>
+                <td>@item.PatientName</td>
+                <td>@item.PatientEmail</td>
+                <td>@item.PatientPhoneNo</td>
+                <td>
+                    @if (item.IsBooked && item.Status != 2)
+                    {
+                        <button class="bg-success" onclick="AcceptAppointmet(@item.PatientAppointmentId)">Accept</button>
+                    }
+                    @if (item.IsBooked && @item.Status != 3)
+                    {
+                        <button class="alert-danger" onclick="RejectAppointmet(@item.PatientAppointmentId)">Reject</button>
+                    }
+
+                </td>
+            </tr>
+        }
+    }
+</table>
+
